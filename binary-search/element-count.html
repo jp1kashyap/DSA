@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search</title>
+</head>
+<body>
+    <input type="text" id="arr" placeholder="Enter comma separated sorted numbers" />
+    <input type="number" id="find" placeholder="Enter number to search" />
+    <button type="button" onclick="binarySearchCountElement()">Count</button>
+    <div id="finding"></div>
+    
+</body>
+<script type="text/javascript">
+    function binarySearchCountElement(){
+        const arrString=document.getElementById('arr').value;
+        const arr=arrString.split(',').map(Number);
+        const start=arr[0];
+        const end=arr.length-1;
+        const find=Number(document.getElementById('find').value);
+        console.log('find',find);
+        const firstOccurance=this.firstOccurance(arr,start,end,find);
+        const lastOccurance=this.lastOccurance(arr,start,end,find);
+        if(firstOccurance<0 && lastOccurance<0){
+            document.getElementById('finding').innerHTML=-1;
+            return true;
+        }
+        const count=lastOccurance-firstOccurance+1;
+        console.log('count',count);
+        
+        document.getElementById('finding').innerHTML=count;
+        
+        
+    }
+
+    function firstOccurance(arr,start,end,find){
+        let occurance=-1;
+        while(start<=end){
+            const mid=Math.floor(start+((end-start)/2))
+            if(find==arr[mid]){
+                occurance=mid;
+                end=mid-1;
+            }else if(find<arr[mid]){
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        console.log('first occurance =====>',occurance);
+        
+        return occurance;
+    }
+
+    function lastOccurance(arr,start,end,find){
+        let occurance=-1;
+        while(start<=end){
+            const mid=Math.floor(start+((end-start)/2))
+            if(find==arr[mid]){
+                occurance=mid;
+                start=mid+1;
+            }else if(find<arr[mid]){
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+        console.log('last occurance =====>',occurance);
+        return occurance;
+    }
+</script>
+</html>
