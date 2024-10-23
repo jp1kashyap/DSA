@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search First Occurance</title>
+</head>
+<body>
+    <input type="text" id="arr" placeholder="Enter comma-separated values (e.g. 2,3,10,10,10,18,20)" />
+    <input type="number" id="find" placeholder="Enter number to search" />
+    <button type="button" onclick="binarySearch()">Search</button>
+    <div id="finding"></div>
+    
+</body>
+<script type="text/javascript">
+    
+    function binarySearch(){
+        // 2,3,10,10,10,18,20
+        const stringArr=document.getElementById('arr').value;
+        const arr=stringArr.split(',').map(Number);
+        console.log(arr);
+        let start=0;
+        let end = arr.length-1;
+        const find=parseInt(document.getElementById('find').value,10);
+        let result=-1;
+        
+        while(start<=end){
+            const mid=Math.floor(start+((end-start)/2),10);
+            console.log(mid,arr[mid],find);
+            if(find==arr[mid]){
+                console.log('mid',mid);
+                result=mid;
+                end=mid-1;
+            }else if(find<arr[mid]){
+                console.log('lesser');
+                end=mid-1;
+            }else{
+                console.log('greater');
+                start=mid+1;
+            }
+        }
+        document.getElementById('finding').innerHTML = result !== -1 
+        ? `Element found at index ${result}` 
+        : 'Element not found';
+    }
+    
+</script>
+</html>

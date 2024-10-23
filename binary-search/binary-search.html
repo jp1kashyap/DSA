@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search</title>
+</head>
+<body>
+    <input type="text" id="arr" placeholder="Enter comma separated sorted numbers" />
+    <input type="number" id="find" placeholder="Enter number to search" />
+    <button type="button" onclick="binarySearch()">Search</button>
+    <div id="finding"></div>
+    
+</body>
+<script type="text/javascript">
+    
+    function binarySearch(){
+        const stringArr=document.getElementById('arr').value;
+        const arr=stringArr.split(',').map(Number);
+        const find=parseInt(document.getElementById('find').value,10);
+        // identify sorting 
+        if(arr.length==1){
+            document.getElementById('finding').innerHTML=arr[0];
+        } else if(arr.length>1){
+            const firstEle=arr[0];
+            const lastEle=arr[arr.length-1];
+            if(firstEle>lastEle){
+                // desceding sorted
+                console.log('desceding sorted');
+                binaryDescendingSearch(arr,find);
+            }else{
+                // ascending order
+                console.log('ascending sorted');
+                binaryAscendingSearch(arr,find);
+            }
+        }else{
+            document.getElementById('finding').innerHTML='Invalid array';
+        }
+    }
+    
+    // search in ascending order
+    //1,2,3,4,5,6,7,8,9,10
+    function binaryAscendingSearch(arr,find){
+        let start=0;
+        let end=arr.length-1;
+        if(find>arr[end] || find<arr[start]){
+            document.getElementById('finding').innerHTML='Finding is not in given input';
+            return true;
+        }
+        console.log('start searching');
+        
+        while(start<=end){
+            const mid=Math.floor(start+((end-start)/2),10);
+            if(arr[mid]==find){
+                document.getElementById('finding').innerHTML=mid;
+                break;
+            }else if(find<arr[mid]){
+                end=mid-1;
+            }else{
+                start=mid+1;
+            }
+        }
+    }
+
+    // search in descending order
+    // 10,9,8,7,6,5,4,3,2,1
+    function binaryDescendingSearch(arr,find){
+        let start=0;
+        let end=arr.length-1;
+        if(find<arr[end] || find>arr[start]){
+            document.getElementById('finding').innerHTML='Finding is not in given input';
+            return true;
+        }
+        while(start<=end){
+            const mid=parseInt((start+(end-start)/2),10);
+            if(arr[mid]==find){
+                document.getElementById('finding').innerHTML=mid;
+                break;
+            }else if(find<arr[mid]){
+                start=mid+1;
+            }else{
+                end=mid-1
+            }
+        }
+    }
+</script>
+</html>
