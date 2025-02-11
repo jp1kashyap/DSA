@@ -43,6 +43,21 @@
                     console.log(isSorted);
                 </pre>
             </div>
+
+            <div class="row">
+                <h3>Reverse an array</h3>
+                <pre>
+                    const arr=[5,4,3,5,1];
+                    let low=0;
+                    let high=arr.length-1;
+                    while(low<high){
+                        [arr[high],arr[low]]=[arr[low],arr[high]];
+                        low++;
+                        high--;
+                    }
+                    console.log(arr);
+                </pre>
+            </div>
         </div>
         <div class="col-md-3">
         </div>
